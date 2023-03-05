@@ -1,5 +1,6 @@
 import React from 'react';
 import { ComposableMap, Geographies, Geography} from "react-simple-maps";
+import Moment from "moment";
 
 import ServiceData from '../assets/js/service-data.json';
 
@@ -51,20 +52,26 @@ function MapMarkers() {
     <div className="service-map__markers">
       {ServiceData.services.map((data) => {
 
-        const serviceState = data.state;
+        /* Shortcuts */
+        const serState = data.state;
+        const serName = data.name;
+        const serRegion = data.aws_region;
+        const serUpdated = data.updated;
 
         return (   
-          <div key={data.name} className={'service-map__marker ' + data.aws_region + ' state--' + data.state}>
+          <div key={serName} className={'service-map__marker ' + serRegion + ' state--' + serState}>
             <div className="service-map__tooltip">
-              <div className="service-map__tooltip__icon">
-              <TooltipIcon serviceState={serviceState} />
+              <div className="service-map__tooltip__icon">  
+                <TooltipIcon serviceState={serState} />
               </div> 
               <div className="service-map__tooltip__content">
-                <h3>{data.name}</h3>
-                <p>{data.state}</p>
+                <FormattedRegion region={serRegion} />
+                <h3>{serName}</h3>
+                <ServiceStateDescription serviceState={serState} />
+                <FormattedDate updated={serUpdated} />
               </div>
             </div>
-            <div className={ 'service-map__state service-map__state--' + data.state}></div>
+            <div className={ 'service-map__state service-map__state--' + serState}></div>
           </div>
         )
       })}
@@ -87,5 +94,43 @@ function TooltipIcon(props: any) {
   return <img src={imgSrc} className={'state--' + props.serviceState} alt="" />
 
 }
+
+function ServiceStateDescription(props: any) {
+
+  let description;
+  
+  if(props.serviceState == "ok") {
+    description = "Service is fully functional."
+  } else if (props.serviceState == "alarm") {
+    description = "Service has encountered a problem."
+  } else {
+    description = "Service down."
+  }
+
+  return <p className="font-size--small">{description}</p>
+
+}
+
+function FormattedRegion(props: any) {
+
+  let regionArr = props.region.split('-'); 
+  let regionCont = regionArr[0].toUpperCase();
+  let regionDir = regionArr[1];
+
+  return (
+  <span className="text--label font-size--xsmall">{regionCont} {regionDir}</span>
+  )
+};
+
+function FormattedDate(props: any) {
+
+  let lastUpdate = props.updated;
+
+  Moment.locale('en');
+
+  return (
+  <span className="date--label font-size--xsmall">{Moment(lastUpdate).format('MM.D.YYYY h:mm:ss a')}</span>
+  )
+};
 
 export default WorldMap;

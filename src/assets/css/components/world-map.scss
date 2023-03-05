@@ -1,18 +1,21 @@
 .service-map {
     position: relative;
 
-    max-width: 1200px;
-    max-height: 650px;
+    max-width: 120rem;
+    max-height: 65rem;
 
     margin-left: auto;
     margin-right: auto;
 
     overflow: hidden;
-    border-radius: 30px;
-    box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+    border-radius: 3rem;
+    box-shadow: 0 2rem 3rem rgba(0,0,0,0.2);
 }
 
 .service-map__markers {
+    display: flex;
+    flex-wrap: wrap;
+
     position: absolute;
     top: 0;
     bottom: 0;
@@ -25,9 +28,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+
+    min-width: 30rem;
+
+    margin-left: 3rem;
+    margin-right: 3rem;
+
+
 }
 
 // Tooltip opened from mark
@@ -36,44 +43,54 @@
     flex-direction: row;
 
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 
-    padding: 20px 10px;
+    padding: 3rem 1rem;
 
     text-align: left;
 
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-
-    h3, p {
-        margin: 0;
-    }
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
 
     h3 {
-        margin-bottom: 10px;
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        margin-top: 0;
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 2.0rem;
+    }
+
+    .text--label {
+        margin-bottom: 0.2rem;
     }
 
     &__icon {
         display: flex;
         justify-content: center;
-        height: 80px;
-        width: 100px;
+
+        height: 8rem;
+        min-width: 10rem;
+
+        margin-right: 0.8rem;
+
         overflow: hidden;
 
         img {
-            height: 90px;
+            height: 9rem;
             width: auto;
-            margin-top: auto;
 
             // Custom sizing since the icons are not the same size
             &.state--alarm {
-                height: 70px;
+                height: 7rem;
             }
     
             &.state--failure {
-                height: 100px;
+                height: 10rem;
             }
         }
 
@@ -89,31 +106,45 @@
 
 .service-map__state {
     display: block;
-    height: 20px;
-    width: 20px;
-    outline: 0 solid;
-    
+    height: 2rem;
+    width: 2rem;
+
+    outline: 0.2rem solid;
+    border: 0.3rem solid #fff;
+
     border-radius: 50%;
-    transition: 0.1s outline ease-out;
+    transition: 0.1s all ease-out;
 
     &:hover {
         outline: 8px solid;
-        transition: 0.2s outline ease-out;
+        transition: 0.2s all ease-out;
     }
 
     &.service-map__state--ok {
         background: green;
-        outline-color: rgba(green, 0.2)
+        outline-color: rgba(green, 0.2);
+
+        &:hover {
+            border-color: rgba(green, 0.2);
+        }
     }
 
     &.service-map__state--alarm {
         background: yellow;
-        outline-color: rgba(yellow, 0.2)
+        outline-color: rgba(yellow, 0.2);
+
+        &:hover {
+            border-color: rgba(yellow, 0.2);
+        }
     }
 
     &.service-map__state--failure {
         background: red;
-        outline-color: rgba(red, 0.2)
+        outline-color: rgba(red, 0.2);
+
+        &:hover {
+            border-color: rgba(red, 0.2);
+        }
     }
 }
 
