@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <div>
-        <h2>The map</h2>
+        <h1>Service Status</h1>
         <WorldMap />
       </div>
     </div>

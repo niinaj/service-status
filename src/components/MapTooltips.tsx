@@ -10,7 +10,7 @@ import {ReactComponent as IconFailure} from '../assets/icons/icon-failure.svg';
 function RenderMapTooltips() {
     return (
         <div className="service-map__markers">
-        {ServiceData.services.map((data) => {
+        {ServiceData.services.map((data, index) => {
 
             const serState = data.state;
             const serName = data.name;
@@ -18,7 +18,7 @@ function RenderMapTooltips() {
             const serUpdated = data.updated;
 
             return (   
-                <MapTooltip serState={serState} serName={serName} serRegion={serRegion} serUpdated={serUpdated} />
+                <MapTooltip key={index} serState={serState} serName={serName} serRegion={serRegion} serUpdated={serUpdated} />
             )
         })
         }
@@ -26,7 +26,7 @@ function RenderMapTooltips() {
     )
 }
   
-function MapTooltip ({serState, serName, serRegion, serUpdated} : any) {
+function MapTooltip ({index, serState, serName, serRegion, serUpdated} : any) {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -39,8 +39,8 @@ function MapTooltip ({serState, serName, serRegion, serUpdated} : any) {
     }
 
     return (   
-        <div key={serName} className={'service-map__marker ' + serRegion + ' state--' + serState}>
-          <div className={`service-map__tooltip ${isOpen ? 'is-open' : ''}`}>
+        <div key={serName} className={`service-map__marker marker-${index} ${serRegion} state--${serState} ${isOpen ? 'is-open' : ''}`}>
+          <div className={`service-map__tooltip`}>
             <div className="service-map__tooltip__icon">  
               <TooltipIcon serviceState={serState} />
             </div> 
@@ -53,7 +53,7 @@ function MapTooltip ({serState, serName, serRegion, serUpdated} : any) {
             <button className="close-button" onClick={closeTooltip}>×</button>
           </div>
           <div 
-              className={ 'service-map__state service-map__state--' + serState}
+              className={`service-map__state service-map__state--${serState}`}
               onClick={openTooltip}
           >
           </div>

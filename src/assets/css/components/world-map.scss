@@ -1,3 +1,11 @@
+$color-red: #ff522f;
+$color-green: #6bb01a;
+$color-yellow: #ffc931;
+
+$grey-blue: #869fa3;
+
+$outline-offset: 0.7rem;
+
 .service-map {
     position: relative;
 
@@ -7,9 +15,56 @@
     margin-left: auto;
     margin-right: auto;
 
-    overflow: hidden;
+    border-radius: 3rem;   
+
+    box-shadow: 1rem 2rem 3rem rgba($grey-blue, 0.3);
+
+
+    &:before {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(-45deg, #FFCFDF 0%, #B0F3F1 100% );
+        transform: translate3d(0px, 20px, 0) scale(0.95);
+        filter: blur(20px);
+        opacity: var(0.7);
+        transition: opacity 0.3s;
+        border-radius: inherit;
+    }
+
+    &::after {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: inherit;
+        border-radius: inherit;
+    }
+        
+}
+
+.service-map__background {
+    max-width: 120rem;
+    max-height: 65rem;
+
+    margin-left: auto;
+    margin-right: auto;
+
     border-radius: 3rem;
-    box-shadow: 0 2rem 3rem rgba(0,0,0,0.2);
+    border: 1rem solid #fff;
+
+    overflow: hidden;
+
+    svg {
+        background-color: #edf3f4;
+    }
 }
 
 .service-map__markers {
@@ -29,11 +84,34 @@
     flex-direction: column;
     align-items: center;
 
-    min-width: 30rem;
+    min-width: 32rem;
 
     margin-left: 3rem;
     margin-right: 3rem;
 
+    pointer-events: none;
+
+    // Open state
+    &.is-open {
+        .service-map__tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+    
+            pointer-events: initial;
+    
+            transition: 0.1s all ease-out;
+        }
+        .service-map__state {
+            outline-width: $outline-offset;
+            transition: 0.1s all ease-out;
+            outline-offset: 0;
+
+            &:hover {
+                box-shadow: none;
+            }
+        }
+    }
 
 }
 
@@ -44,11 +122,11 @@
 
     visibility: hidden;
     opacity: 0;
-    position: relative;
+    pointer-events: none;
 
     width: 100%;
-    margin-bottom: 2rem;
 
+    margin-bottom: 2rem;
     padding: 3rem 1rem;
 
     text-align: left;
@@ -59,24 +137,9 @@
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
     transform: translateY(2rem);
 
-    h3 {
-        font-size: 2.2rem;
-        margin-bottom: 1.5rem;
-        margin-top: 0;
-    }
-
     p {
         margin-top: 0;
         margin-bottom: 2.0rem;
-    }
-
-    // Open state
-    &.is-open {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
-
-        transition: 0.1s all ease-out;
     }
 
     .text--label {
@@ -121,7 +184,7 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background-color: rgba(green, 0.1);
+        background-color: rgba($color-green, 0.1);
         z-index: 0;
     }
 }
@@ -135,7 +198,7 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background-color: rgba(yellow, 0.1);
+        background-color: rgba($color-yellow, 0.1);
         z-index: 0;
     }
     svg {
@@ -153,7 +216,7 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background-color: rgba(red, 0.1);
+        background-color: rgba($color-red, 0.1);
         z-index: 0;
     }
     svg {
@@ -163,74 +226,87 @@
 
 // Markers on map
 .service-map__state {
+    position: absolute;
+    bottom: -3rem; 
+
     display: block;
     height: 2.0rem;
     width: 2.0rem;
 
-    outline: 0.2rem solid;
-    border: 0.5rem solid #fff;
+    outline: 0.4rem solid;
+    outline-offset: $outline-offset;
+    border: 0;
 
     border-radius: 50%;
-    transition: 0.1s all ease-out;
+    transition: 0.15s all ease-out;
+
+    pointer-events: initial;
 
     &:hover {
-        outline: 0.8rem solid;
-        transition: 0.2s all ease-out;
+
+        transition: 0.15s all ease-out;
 
         cursor: pointer;
     }
 
     &.service-map__state--ok {
-        background: green;
-        outline-color: rgba(green, 0.2);
+        background: $color-green;
+        outline-color: rgba($color-green, 0.2);
+
+        box-shadow: 0 0 2rem rgba($color-green, 0.5);
 
         &:hover {
-            border-color: rgba(green, 0.2);
+            border-color: rgba($color-green, 0.2);
+            box-shadow: 0 0 0 $outline-offset rgba($color-green, 0.2);
         }
     }
 
     &.service-map__state--alarm {
-        background: yellow;
-        outline-color: rgba(yellow, 0.2);
+        background: $color-yellow;
+        outline-color: rgba($color-yellow, 0.2);
+        box-shadow: 0 0 2rem rgba($color-yellow, 0.5);
 
         &:hover {
-            border-color: rgba(yellow, 0.2);
+            border-color: rgba($color-yellow, 0.2);
+            box-shadow: 0 0 0 $outline-offset rgba($color-yellow, 0.2);
         }
     }
 
     &.service-map__state--failure {
-        background: red;
-        outline-color: rgba(red, 0.2);
+        background: $color-red;
+        outline-color: rgba($color-red, 0.2);
+        box-shadow: 0 0 2rem rgba($color-red, 0.5);
 
         &:hover {
-            border-color: rgba(red, 0.2);
+            border-color: rgba($color-red, 0.2);
+            box-shadow: 0 0 0 $outline-offset rgba($color-red, 0.2);
         }
     }
 }
 
-// Global open tooltip styles 
-.service-map__tooltip.is-open {
-    + .service-map__state {
-        outline-width: 0.8rem;
-        transition: 0.2s all ease-out;
+// Marker placements on map
+.service-map__marker {
+    position: absolute;
+    transform: translateX(-50%);
 
-        &.service-map__state--ok {
-            border-color: rgba(green, 0.2);
-        }
-    
-        &.service-map__state--alarm {
-            border-color: rgba(yellow, 0.2);
-        }
-    
-        &.service-map__state--failure {
-            border-color: rgba(red, 0.2);
-        }
+    &.eu-west-1 {
+        left: 45%;
+        top: 7.5%;
     }
-}
 
-.service-map__background {
-    svg {
-        background-color: #edf3f4;
+    &.ap-northeast-1 {
+        left: 88.7%;
+        top: 17%;
+    }
+
+    &.us-east-1 {
+        left: 25%;
+        top: 20%;
+    }
+
+    &.ap-northeast-1:last-child {
+        left: 91.5%;
+        top: 21%;
     }
 }
 
