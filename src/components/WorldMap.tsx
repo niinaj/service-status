@@ -3,14 +3,13 @@ import { ComposableMap, Geographies, Geography} from "react-simple-maps";
 import Moment from "moment";
 
 import ServiceData from '../assets/js/service-data.json';
+import {ReactComponent as IconOK} from '../assets/icons/icon-ok.svg';
+import {ReactComponent as IconAlert} from '../assets/icons/icon-alert.svg';
+import {ReactComponent as IconFailure} from '../assets/icons/icon-failure.svg';
 
 import '../assets/css/components/world-map.scss';
 
 const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
-
-const iconOk : string = require('../assets/icons/icon-ok.svg').default;
-const iconAlert : string = require('../assets/icons/icon-alert.svg').default;
-const iconFailure : string = require('../assets/icons/icon-failure.svg').default;
 
 function WorldMap() {
   return (
@@ -81,18 +80,15 @@ function MapMarkers() {
 
 function TooltipIcon(props: any) {
 
-  let imgSrc;
+  // let imgSrc;
   
   if(props.serviceState == "ok") {
-    imgSrc = iconOk
+    return <IconOK />
   } else if (props.serviceState == "alarm") {
-    imgSrc = iconAlert
+    return <IconAlert />
   } else {
-    imgSrc = iconFailure
+    return <IconFailure />
   }
-
-  return <img src={imgSrc} className={'state--' + props.serviceState} alt="" />
-
 }
 
 function ServiceStateDescription(props: any) {

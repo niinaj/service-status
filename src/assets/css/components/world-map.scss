@@ -73,6 +73,8 @@
         display: flex;
         justify-content: center;
 
+        position: relative;
+
         height: 8rem;
         min-width: 10rem;
 
@@ -80,20 +82,11 @@
 
         overflow: hidden;
 
-        img {
+        svg {
             height: 9rem;
             width: auto;
-
-            // Custom sizing since the icons are not the same size
-            &.state--alarm {
-                height: 7rem;
-            }
-    
-            &.state--failure {
-                height: 10rem;
-            }
+            z-index: 1;
         }
-
 
     }
 
@@ -104,20 +97,74 @@
     }
 }
 
+// Status related tooltip styles
+.service-map__marker.state--ok {
+    .service-map__tooltip__icon:after {
+        content: '';
+        position: absolute;
+        top: 0rem;
+        left: 1rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(green, 0.1);
+        z-index: 0;
+    }
+}
+     
+.service-map__marker.state--alarm {
+    .service-map__tooltip__icon:after {
+        content: '';
+        position: absolute;
+        top: 0rem;
+        left: 1rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(yellow, 0.1);
+        z-index: 0;
+    }
+    svg {
+        height: 8rem;
+        margin-top: 0.5rem;
+    }
+}
+
+.service-map__marker.state--failure {
+    .service-map__tooltip__icon:after {
+        content: '';
+        position: absolute;
+        top: 0rem;
+        left: 1rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(red, 0.1);
+        z-index: 0;
+    }
+    svg {
+        height: 11rem;
+    }
+}
+
+
+// Markers on map
 .service-map__state {
     display: block;
-    height: 2rem;
-    width: 2rem;
+    height: 2.0rem;
+    width: 2.0rem;
 
     outline: 0.2rem solid;
-    border: 0.3rem solid #fff;
+    border: 0.5rem solid #fff;
 
     border-radius: 50%;
     transition: 0.1s all ease-out;
 
     &:hover {
-        outline: 8px solid;
+        outline: 0.8rem solid;
         transition: 0.2s all ease-out;
+
+        cursor: pointer;
     }
 
     &.service-map__state--ok {
