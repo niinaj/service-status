@@ -91,16 +91,22 @@ $outline-offset: 0.7rem;
 
     pointer-events: none;
 
+
     // Open state
     &.is-open {
         .service-map__tooltip {
             visibility: visible;
             opacity: 1;
-            transform: translateY(0);
-    
+            transform: translateY(60%);
+
             pointer-events: initial;
+            height: auto;
     
             transition: 0.1s all ease-out;
+
+            @media (min-width: 768px) {
+                transform: translateY(-105%);
+            }
         }
         .service-map__state {
             outline-width: $outline-offset;
@@ -120,11 +126,14 @@ $outline-offset: 0.7rem;
     display: flex;
     flex-direction: row;
 
+    position: absolute;
+
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
 
     width: 100%;
+    height: 0;
 
     margin-bottom: 2rem;
     padding: 3rem 1rem;
@@ -135,7 +144,7 @@ $outline-offset: 0.7rem;
     border-radius: 0.8rem;
     
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
-    transform: translateY(2rem);
+    transform: translateY(-90%);
 
     p {
         margin-top: 0;
@@ -242,6 +251,7 @@ $outline-offset: 0.7rem;
 
     pointer-events: initial;
 
+
     &:hover {
 
         transition: 0.15s all ease-out;
@@ -290,23 +300,68 @@ $outline-offset: 0.7rem;
     transform: translateX(-50%);
 
     &.eu-west-1 {
-        left: 45%;
-        top: 7.5%;
+        left: 42%;
+        top: 30%;
+
+        @media (min-width: 768px) {
+            left: 45%;
+            top: 31.5%;
+        }
+
+        @media (max-width: 768px) {
+            .service-map__tooltip {
+                right: -6%;
+            }
+        }
     }
 
     &.ap-northeast-1 {
-        left: 88.7%;
-        top: 17%;
+        left: 80%;
+        top: 40%;
+
+        @media (min-width: 768px) {
+            left: 90%;
+            top: 45%;
+        }
+
+        @media (max-width: 768px) {
+            .service-map__tooltip {
+                left: -55%;
+            }
+        }
     }
 
     &.us-east-1 {
-        left: 25%;
-        top: 20%;
+        left: 21%;
+        top: 40%;
+
+        @media (min-width: 768px) {
+            left: 24%;
+            top: 44%;
+        }
+
+        @media (max-width: 768px) {
+            .service-map__tooltip {
+                left: 30%;
+            }
+        }
     }
 
     &.ap-northeast-1:last-child {
-        left: 91.5%;
-        top: 21%;
+        left: 90%;
+        top: 40%;
+
+        @media (min-width: 768px) {
+            left: 93%;
+            top: 45%;
+        }
+
+        @media (max-width: 768px) {
+            .service-map__tooltip {
+                left: -70%;
+            }
+        }
+
     }
 }
 

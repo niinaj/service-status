@@ -2,7 +2,6 @@ import React from 'react';
 
 import WorldMap from './components/WorldMap';
 
-import logo from './logo.svg';
 import './assets/css/components/App.scss';
 
 function App() {
