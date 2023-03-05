@@ -7,8 +7,7 @@ import './assets/css/components/App.scss';
 function App() {
   return (
     <div className="App">
-      <div>
-        <h1>Service Status</h1>
+      <div className="App__inner">
         <WorldMap />
       </div>
     </div>

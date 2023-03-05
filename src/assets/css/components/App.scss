@@ -1,10 +1,24 @@
 .App {
-  max-width: 120rem;
-  max-height: 65rem;
 
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  padding: 3rem 2rem;
+  width: 100vw;
+  height: 100vh;
+
+  .App__inner {
+    width: 100%;
+    height: 100%;
+    max-width: 120rem;
+    max-height: 65rem;
+  
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
 }
 

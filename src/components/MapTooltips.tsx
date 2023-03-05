@@ -64,9 +64,9 @@ function MapTooltip ({index, serState, serName, serRegion, serUpdated} : any) {
 
 function TooltipIcon(props: any) {
   
-    if(props.serviceState == "ok") {
+    if(props.serviceState === "ok") {
       return <IconOK />
-    } else if (props.serviceState == "alarm") {
+    } else if (props.serviceState === "alarm") {
       return <IconAlert />
     } else {
       return <IconFailure />
@@ -77,9 +77,9 @@ function ServiceStateDescription(props: any) {
   
     let description;
     
-    if(props.serviceState == "ok") {
+    if(props.serviceState === "ok") {
       description = "Service is fully functional."
-    } else if (props.serviceState == "alarm") {
+    } else if (props.serviceState === "alarm") {
       description = "Service has encountered a problem."
     } else {
       description = "Service down."
