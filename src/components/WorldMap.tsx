@@ -1,11 +1,6 @@
 import React from 'react';
 import { ComposableMap, Geographies, Geography} from "react-simple-maps";
-import Moment from "moment";
-
-import ServiceData from '../assets/js/service-data.json';
-import {ReactComponent as IconOK} from '../assets/icons/icon-ok.svg';
-import {ReactComponent as IconAlert} from '../assets/icons/icon-alert.svg';
-import {ReactComponent as IconFailure} from '../assets/icons/icon-failure.svg';
+import MapTooltips from './MapTooltips';
 
 import '../assets/css/components/world-map.scss';
 
@@ -14,7 +9,7 @@ const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/wo
 function WorldMap() {
   return (
     <section className="service-map">
-      <MapMarkers />
+      <MapTooltips />
       <MapBackground />
     </section>
   );
@@ -46,12 +41,12 @@ function MapBackground() {
   );
 }
 
+/*
 function MapMarkers() {
   return (
     <div className="service-map__markers">
       {ServiceData.services.map((data) => {
 
-        /* Shortcuts */
         const serState = data.state;
         const serName = data.name;
         const serRegion = data.aws_region;
@@ -79,8 +74,6 @@ function MapMarkers() {
 }
 
 function TooltipIcon(props: any) {
-
-  // let imgSrc;
   
   if(props.serviceState == "ok") {
     return <IconOK />
@@ -128,5 +121,6 @@ function FormattedDate(props: any) {
   <span className="date--label font-size--xsmall">{Moment(lastUpdate).format('MM.D.YYYY h:mm:ss a')}</span>
   )
 };
+*/
 
 export default WorldMap;
